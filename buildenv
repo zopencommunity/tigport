@@ -1,0 +1,39 @@
+export ZOPEN_GIT_URL="https://github.com/jonas/tig.git"
+export ZOPEN_GIT_DEPS="make zoslib git ncurses zlib"
+export ZOPEN_TARBALL_URL="https://github.com/jonas/tig/releases/download/tig-2.5.8/tig-2.5.8.tar.gz"
+export ZOPEN_TARBALL_DEPS="make zoslib git ncurses zlib coreutils libiconv"
+export ZOPEN_TYPE="TARBALL"
+export ZOPEN_RUNTIME_DEPS="git"
+export ZOPEN_EXTRA_CONFIGURE_OPTS="--with-ncurses=\$NCURSES_HOME"
+export ZOPEN_COMP=CLANG
+export ZOPEN_EXTRA_CPPFLAGS="-I\$NCURSES_HOME/include/ncurses"
+
+zopen_check_results()
+{
+  dir="$1"
+  pfx="$2"
+  chk="$1/$2_check.log"
+
+  # Echo the following information to gauge build health
+  echo "actualFailures:0"
+  echo "totalTests:1"
+  echo "expectedFailures:0"
+  echo "expectedTotalTests:1"
+}
+
+zopen_append_to_env()
+{
+  # echo envars outside of PATH, MANPATH, LIBPATH
+}
+
+zopen_append_to_setup()
+{
+  # echo commands that will run when installing via setup.sh
+}
+
+zopen_get_version()
+{
+  # Modify to echo the version of your tool/library
+  # Rather than hardcoding the version, obtain the version by running the tool/library
+  echo "1.0.0"
+}

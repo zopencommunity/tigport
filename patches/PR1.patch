@@ -1,0 +1,47 @@
+diff --git a/src/io.c b/src/io.c
+index 8504a13..2773c5e 100644
+--- a/src/io.c
++++ b/src/io.c
+@@ -318,19 +318,25 @@ open_trace(int devnull, const char *argv[])
+ 		int fd = open(trace_file, O_RDWR | O_CREAT | O_APPEND, 0666);
+ 		int i;
+ 
++#ifndef __MVS__
+ 		flock(fd, LOCK_EX);
++#endif
+ 		for (i = 0; argv[i]; i++) {
+ 			if (write(fd, argv[i], strlen(argv[i])) == -1
+ 			    || write(fd, " ", 1) == -1)
+ 				break;
+ 		}
+ 		if (argv[i] || write(fd, "\n", 1) == -1) {
++#ifndef __MVS__
+ 			flock(fd, LOCK_UN);
++#endif
+ 			close(fd);
+ 			return devnull;
+ 		}
+ 
++#ifndef __MVS__
+ 		flock(fd, LOCK_UN);
++#endif
+ 		return fd;
+ 	}
+ 
+diff --git a/src/tig.c b/src/tig.c
+index c8e6786..9fd9fa6 100644
+--- a/src/tig.c
++++ b/src/tig.c
+@@ -817,9 +817,12 @@ main(int argc, const char *argv[])
+ 		die("Failed to setup signal handler");
+ #endif
+ 
++// Always use UTF8
++#ifndef __MVS__
+ 	if (setlocale(LC_ALL, "")) {
+ 		codeset = nl_langinfo(CODESET);
+ 	}
++#endif
+ 
+ 	die_if_failed(handle_git_prefix(), "Failed to handle GIT_PREFIX");
+ 	die_if_failed(load_repo_info(), "Failed to load repo info.");
