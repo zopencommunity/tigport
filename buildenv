@@ -1,8 +1,11 @@
-export ZOPEN_GIT_URL="https://github.com/jonas/tig.git"
-export ZOPEN_GIT_DEPS="make zoslib git ncurses zlib"
-export ZOPEN_TARBALL_URL="https://github.com/jonas/tig/releases/download/tig-2.5.8/tig-2.5.8.tar.gz"
-export ZOPEN_TARBALL_DEPS="make zoslib git ncurses zlib coreutils libiconv"
-export ZOPEN_TYPE="TARBALL"
+# bump: tig-version /TIG_VERSION="(.*)"/ https://github.com/jonas/tig.git|semver:*
+TIG_VERSION="2.5.8"
+
+export ZOPEN_BUILD_LINE="STABLE"
+export ZOPEN_DEV_URL="https://github.com/jonas/tig.git"
+export ZOPEN_DEV_DEPS="make zoslib git ncurses zlib"
+export ZOPEN_STABLE_URL="https://github.com/jonas/tig/releases/download/tig-${TIG_VERSION}/tig-${TIG_VERSION}.tar.gz"
+export ZOPEN_STABLE_DEPS="make zoslib git ncurses zlib coreutils libiconv"
 export ZOPEN_RUNTIME_DEPS="git"
 export ZOPEN_EXTRA_CONFIGURE_OPTS="--with-ncurses=\$NCURSES_HOME"
 export ZOPEN_COMP=CLANG
@@ -39,7 +42,5 @@ zopen_append_to_setup()
 
 zopen_get_version()
 {
-  # Modify to echo the version of your tool/library
-  # Rather than hardcoding the version, obtain the version by running the tool/library
-  echo "1.0.0"
+  echo "$TIG_VERSION"
 }
