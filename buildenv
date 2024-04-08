@@ -11,6 +11,10 @@ export ZOPEN_EXTRA_CONFIGURE_OPTS="--with-ncurses=\$NCURSES_HOME"
 export ZOPEN_COMP=CLANG
 export ZOPEN_EXTRA_CPPFLAGS="-I\$NCURSES_HOME/include/ncurses"
 
+zopen_pre_install() {
+  make install-doc || true # this will fail in ASCII-doc which is fine
+}
+
 zopen_check_results()
 {
   dir="$1"
