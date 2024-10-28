@@ -2,6 +2,7 @@
 TIG_VERSION="2.5.9"
 
 export ZOPEN_BUILD_LINE="STABLE"
+export ZOPEN_CATEGORIES="utilities source_control"
 export ZOPEN_DEV_URL="https://github.com/jonas/tig.git"
 export ZOPEN_DEV_DEPS="make zoslib git ncurses zlib"
 export ZOPEN_STABLE_URL="https://github.com/jonas/tig/releases/download/tig-${TIG_VERSION}/tig-${TIG_VERSION}.tar.gz"
