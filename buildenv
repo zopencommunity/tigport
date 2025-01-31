@@ -1,5 +1,5 @@
 # bump: tig-version /TIG_VERSION="(.*)"/ https://github.com/jonas/tig.git|semver:*
-TIG_VERSION="2.5.9"
+TIG_VERSION="2.5.11"
 
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CATEGORIES="utilities source_control"
