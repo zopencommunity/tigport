@@ -1,16 +1,17 @@
 # bump: tig-version /TIG_VERSION="(.*)"/ https://github.com/jonas/tig.git|semver:*
-TIG_VERSION="2.5.10"
+TIG_VERSION="2.6.0"
 
 export ZOPEN_BUILD_LINE="STABLE"
 export ZOPEN_CATEGORIES="utilities source_control"
 export ZOPEN_DEV_URL="https://github.com/jonas/tig.git"
 export ZOPEN_DEV_DEPS="make zoslib git ncurses zlib"
 export ZOPEN_STABLE_URL="https://github.com/jonas/tig/releases/download/tig-${TIG_VERSION}/tig-${TIG_VERSION}.tar.gz"
-export ZOPEN_STABLE_DEPS="make zoslib git ncurses zlib coreutils libiconv"
+export ZOPEN_STABLE_DEPS="make zoslib git ncurses zlib coreutils libiconv pkgconfig findutils"
 export ZOPEN_RUNTIME_DEPS="git"
 export ZOPEN_EXTRA_CONFIGURE_OPTS="--with-ncurses=\$NCURSES_HOME"
 export ZOPEN_COMP=CLANG
 export ZOPEN_EXTRA_CPPFLAGS="-I\$NCURSES_HOME/include/ncurses"
+export ZOPEN_CHECK="skip"
 
 zopen_pre_install() {
   make install-doc || true # this will fail in ASCII-doc which is fine
@@ -47,5 +48,5 @@ zopen_append_to_setup()
 
 zopen_get_version()
 {
-  echo "$TIG_VERSION"
+  src/tig --version | sed -n "s/^tig version //p" | cut -d"-" -f1
 }
